@@ -13,7 +13,6 @@ import 'nprogress/nprogress.css' // 这个样式必须引入
 Vue.config.productionTip = false
 Vue.use(VueParticles)
 Vue.use(iView)
-
 // 进度条设置
 
 NProgress.inc(0.2)

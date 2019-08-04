@@ -10,7 +10,7 @@ const router = new VueRouter({
   routes: [
     { path: '/', redirect: '/index' },
     { path: '/index', component: Index, name: 'index' },
-    { path: 'blog', component: Blog, name: 'blog' }
+    { path: '/blog', component: Blog, name: 'blog' }
   ]
 })
 
