@@ -1,195 +1,27 @@
 <template>
   <div class="blog">
-    <vue-particles
-      color="#fff"
-      :particleOpacity="0.7"
-      :particlesNumber="100"
-      shapeType="circle"
-      :particleSize="3"
-      linesColor="#fff"
-      :linesWidth="1"
-      :lineLinked="true"
-      :lineOpacity="0.4"
-      :linesDistance="150"
-      :moveSpeed="2"
-      :hoverEffect="true"
-      hoverMode="grab"
-      :clickEffect="false"
-      clickMode="push"
-      class="lizi"
-    ></vue-particles>
-    <div class="nav">
-      <Icon class="icon" type="ios-menu-outline" size="35" color="#fff" @click="show=!show" />
-      <transition name="slide-fade">
-        <ul v-if="show">
-          <router-link to="index" class="nav-style">首页</router-link>
-          <router-link to="time-line" class="nav-style">更新</router-link>
-          <router-link to="leave-word" class="nav-style">留言</router-link>
-        </ul>
-      </transition>
-    </div>
+    <Particles></Particles>
+    <Nav></Nav>
     <div class="main">
       <div class="wrapper" ref="wrapper">
         <ul class="content">
-          <li>
-            <router-link to="1" class="Astyle">vue注意点</router-link>
+          <li v-for="(item,i) in articles" :key="i">
+            <router-link
+              :to="{name:'articles', params: { id: item.postId }}"
+              class="Astyle"
+            >{{item.title}}</router-link>
             <div class="release-time">
               <Icon type="md-alarm" />发表时间:
-              <span>2019-8-10</span>
+              <span>{{time(item.date)}}</span>
             </div>
             <div class="category">
               <Divider type="vertical" />
               <Icon type="ios-paper" />分类:
-              <span>Node</span>
+              <span>{{item.tags.indexOf(',') ? item.tags.replace(',', ' ') : item.tags}}</span>
             </div>
-            <div class="like">
-              <Divider type="vertical" />
-              <Icon type="md-thumbs-up" />点赞:(20)
-            </div>
-            <div class="content">
-              吸顶元素就是当页面向下滑动，到达该元素位置时，该元素固定在顶部显示的效果。
-              吸顶元素在很多地方都有应用，本文阐述该效果的实现方法。
-            </div>
+            <div class="content" v-html="item.desc"></div>
             <div class="read">
-              <Button type="info" size="large" to="article">阅读本文</Button>
-            </div>
-          </li>
-          <li>
-            <router-link to="1" class="Astyle">vue注意点</router-link>
-            <div class="release-time">
-              <Icon type="md-alarm" />发表时间:
-              <span>2019-8-10</span>
-            </div>
-            <div class="category">
-              <Divider type="vertical" />
-              <Icon type="ios-paper" />分类:
-              <span>Node</span>
-            </div>
-            <div class="like">
-              <Divider type="vertical" />
-              <Icon type="md-thumbs-up" />点赞:(20)
-            </div>
-            <div class="content">
-              吸顶元素就是当页面向下滑动，到达该元素位置时，该元素固定在顶部显示的效果。
-              吸顶元素在很多地方都有应用，本文阐述该效果的实现方法。
-            </div>
-            <div class="read">
-              <Button type="info" size="large">阅读本文</Button>
-            </div>
-          </li>
-          <li>
-            <router-link to="1" class="Astyle">vue注意点</router-link>
-            <div class="release-time">
-              <Icon type="md-alarm" />发表时间:
-              <span>2019-8-10</span>
-            </div>
-            <div class="category">
-              <Divider type="vertical" />
-              <Icon type="ios-paper" />分类:
-              <span>Node</span>
-            </div>
-            <div class="like">
-              <Divider type="vertical" />
-              <Icon type="md-thumbs-up" />点赞:(20)
-            </div>
-            <div class="content">
-              吸顶元素就是当页面向下滑动，到达该元素位置时，该元素固定在顶部显示的效果。
-              吸顶元素在很多地方都有应用，本文阐述该效果的实现方法。
-            </div>
-            <div class="read">
-              <Button type="info" size="large">阅读本文</Button>
-            </div>
-          </li>
-          <li>
-            <router-link to="1" class="Astyle">vue注意点</router-link>
-            <div class="release-time">
-              <Icon type="md-alarm" />发表时间:
-              <span>2019-8-10</span>
-            </div>
-            <div class="category">
-              <Divider type="vertical" />
-              <Icon type="ios-paper" />分类:
-              <span>Node</span>
-            </div>
-            <div class="like">
-              <Divider type="vertical" />
-              <Icon type="md-thumbs-up" />点赞:(20)
-            </div>
-            <div class="content">
-              吸顶元素就是当页面向下滑动，到达该元素位置时，该元素固定在顶部显示的效果。
-              吸顶元素在很多地方都有应用，本文阐述该效果的实现方法。
-            </div>
-            <div class="read">
-              <Button type="info" size="large">阅读本文</Button>
-            </div>
-          </li>
-          <li>
-            <router-link to="1" class="Astyle">vue注意点</router-link>
-            <div class="release-time">
-              <Icon type="md-alarm" />发表时间:
-              <span>2019-8-10</span>
-            </div>
-            <div class="category">
-              <Divider type="vertical" />
-              <Icon type="ios-paper" />分类:
-              <span>Node</span>
-            </div>
-            <div class="like">
-              <Divider type="vertical" />
-              <Icon type="md-thumbs-up" />点赞:(20)
-            </div>
-            <div class="content">
-              吸顶元素就是当页面向下滑动，到达该元素位置时，该元素固定在顶部显示的效果。
-              吸顶元素在很多地方都有应用，本文阐述该效果的实现方法。
-            </div>
-            <div class="read">
-              <Button type="info" size="large">阅读本文</Button>
-            </div>
-          </li>
-          <li>
-            <router-link to="1" class="Astyle">vue注意点</router-link>
-            <div class="release-time">
-              <Icon type="md-alarm" />发表时间:
-              <span>2019-8-10</span>
-            </div>
-            <div class="category">
-              <Divider type="vertical" />
-              <Icon type="ios-paper" />分类:
-              <span>Node</span>
-            </div>
-            <div class="like">
-              <Divider type="vertical" />
-              <Icon type="md-thumbs-up" />点赞:(20)
-            </div>
-            <div class="content">
-              吸顶元素就是当页面向下滑动，到达该元素位置时，该元素固定在顶部显示的效果。
-              吸顶元素在很多地方都有应用，本文阐述该效果的实现方法。
-            </div>
-            <div class="read">
-              <Button type="info" size="large">阅读本文</Button>
-            </div>
-          </li>
-          <li>
-            <router-link to="1" class="Astyle">vue注意点</router-link>
-            <div class="release-time">
-              <Icon type="md-alarm" />发表时间:
-              <span>2019-8-10</span>
-            </div>
-            <div class="category">
-              <Divider type="vertical" />
-              <Icon type="ios-paper" />分类:
-              <span>Node</span>
-            </div>
-            <div class="like">
-              <Divider type="vertical" />
-              <Icon type="md-thumbs-up" />点赞:(20)
-            </div>
-            <div class="content">
-              吸顶元素就是当页面向下滑动，到达该元素位置时，该元素固定在顶部显示的效果。
-              吸顶元素在很多地方都有应用，本文阐述该效果的实现方法。
-            </div>
-            <div class="read">
-              <Button type="info" size="large">阅读本文</Button>
+              <button :to="{ name: 'articles', params: { id: item.postId }}">阅读本文</button>
             </div>
           </li>
         </ul>
@@ -200,11 +32,19 @@
 
 <script>
 import Bscroll from 'better-scroll'
+import Nav from '../common/Nav'
+import Particles from '../../util/Particles'
+import { getArticleAll } from '../../../api'
+import { formatTime } from '../../util/time'
 export default {
   data () {
     return {
-      show: false
+      articles: []
     }
+  },
+  components: {
+    Nav,
+    Particles
   },
   mounted () {
     this.$nextTick(() => {
@@ -212,13 +52,17 @@ export default {
         mouseWheel: true
       })
     })
+    this.getArticles()
   },
   methods: {
-    navClick () {
-      this.isShow = !this.isShow
+    getArticles () {
+      getArticleAll().then(res => {
+        console.log(res)
+        this.articles = res.data.datalist[0].list
+      })
     },
-    enterBlog () {
-      this.$router.push({ name: 'blog' })
+    time (date) {
+      return formatTime(date, 'yyyy-mm-dd')
     }
   }
 }
@@ -234,59 +78,12 @@ export default {
   background-size: cover;
   overflow: hidden;
   position: relative;
-  .nav {
-    position: absolute;
-    right: 80px;
-    top: 40px;
-    ul {
-      margin-right: 40px;
-      padding-top: 4px;
-      box-sizing: border-box;
-    }
-  }
-  .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .introduce {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 400px;
-    p {
-      font-size: 16px;
-      color: #fff;
-      text-align: center;
-    }
-    .btn {
-      margin-top: 30px;
-      margin-left: 110px;
-    }
-  }
-  .nav-style {
-    color: #fff;
-    font-size: 16px;
-    margin-right: 30px;
-    font-weight: 700;
-  }
-  .slide-fade-enter-active {
-    transition: all 0.4s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all 0.6s cubic-bezier(1, 0.5, 0.8, 1);
-  }
-  .slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform: translateX(10px);
-    opacity: 0;
-  }
   // 主体部分
   .wrapper {
     overflow: hidden;
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 80%;
     top: 150px;
     left: 50%;
     transform: translateX(-50%);
@@ -324,6 +121,36 @@ export default {
         }
         .read {
           margin-top: 60px;
+          button {
+            position: relative;
+            z-index: 1;
+            border: none;
+            outline: none;
+            padding: 0.8em 1.4em;
+            color: white;
+            background-color: #000;
+            &:hover {
+              cursor: pointer;
+            }
+            &::before {
+              content: '';
+              position: absolute;
+              z-index: -1;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              right: 0;
+              border: 5px solid #000;
+              transform: scale(1);
+              transform-origin: center;
+            }
+            &:hover::before {
+              transition: all 0.75s ease-out;
+              border: 1px solid#e6f7ff;
+              transform: scale(1.25);
+              opacity: 0;
+            }
+          }
         }
       }
     }

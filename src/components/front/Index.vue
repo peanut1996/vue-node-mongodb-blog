@@ -1,24 +1,6 @@
 <template>
   <div class="index">
-    <vue-particles
-      color="#fff"
-      :particleOpacity="0.7"
-      :particlesNumber="80"
-      shapeType="circle"
-      :particleSize="3"
-      linesColor="#fff"
-      :linesWidth="1"
-      :lineLinked="true"
-      :lineOpacity="0.4"
-      :linesDistance="150"
-      :moveSpeed="2"
-      :hoverEffect="true"
-      hoverMode="grab"
-      :clickEffect="false"
-      clickMode="push"
-      class="lizi"
-    ></vue-particles>
-
+    <Particles></Particles>
     <!-- 头像 -->
     <div class="head">
       <img src="../../assets/head.jpg" />
@@ -26,16 +8,7 @@
     </div>
 
     <!-- 搜索 -->
-    <div class="nav">
-      <Icon class="icon" type="ios-menu-outline" size="35" color="#fff" @click="show=!show" />
-      <transition name="slide-fade">
-        <ul v-if="show">
-          <router-link to="index" class="nav-style">首页</router-link>
-          <router-link to="time-line" class="nav-style">更新</router-link>
-          <router-link to="leave-word" class="nav-style">留言</router-link>
-        </ul>
-      </transition>
-    </div>
+    <Nav></Nav>
     <!-- 自我介绍 -->
     <div class="introduce">
       <p>人还不错,除了长得帅一点之外,没别的优点了</p>
@@ -47,16 +20,17 @@
 </template>
 
 <script>
+import Nav from '../common/Nav'
+import Particles from '../../util/Particles'
 export default {
   data () {
-    return {
-      show: false
-    }
+    return {}
+  },
+  components: {
+    Nav,
+    Particles
   },
   methods: {
-    navClick () {
-      this.isShow = !this.isShow
-    },
     enterBlog () {
       this.$router.push({ name: 'blog' })
     }
@@ -93,21 +67,6 @@ export default {
       text-align: center;
     }
   }
-  .nav {
-    position: absolute;
-    right: 80px;
-    top: 40px;
-    ul {
-      margin-right: 40px;
-      padding-top: 4px;
-      box-sizing: border-box;
-    }
-  }
-  .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
   .introduce {
     position: absolute;
     left: 50%;
@@ -122,23 +81,6 @@ export default {
       margin-top: 30px;
       margin-left: 110px;
     }
-  }
-  .nav-style {
-    color: #fff;
-    font-size: 16px;
-    margin-right: 30px;
-    font-weight: 700;
-  }
-  .slide-fade-enter-active {
-    transition: all 0.4s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all 0.6s cubic-bezier(1, 0.5, 0.8, 1);
-  }
-  .slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform: translateX(10px);
-    opacity: 0;
   }
 }
 </style>
